@@ -1,0 +1,7 @@
+Code Book - Human Activity Recognition Using Smartphones Dataset Summary Analysis
+
+1. Subject - Number (1 - 30) corresponding to the identity of participant
+2. Activity - Description of the activity the participant engaged in while measurements were recorded
+3 - 81 Mean Values - Mean value of the given variable for the observations of the given subject engaged in the given activity
+
+Variables from the study are detailed in features_info.txt
