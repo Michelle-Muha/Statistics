@@ -1,0 +1,51 @@
+---
+title: "Stats_CP2"
+author: "Michelle Muha"
+date: "May 20, 2015"
+output: html_document
+---
+#Statistical Inference Course Project - Inferential Data Analysis
+
+##Summary
+This project looks at the tooth growth in guinea pigs in response to different doses and delivery methods of Vitamin C
+
+##Exploratory Analysis
+```{r}
+data(ToothGrowth)
+VC <-ToothGrowth[ToothGrowth$supp == "VC",]
+OJ <-ToothGrowth[ToothGrowth$supp == "OJ",]
+plot(VC$len, VC$dose, col="green", xlab = "Tooth length", ylab = "Dose of Vitamin C (mg)", main = "Orange Juice vs. Asorbic Acid")
+points(OJ$len, OJ$dose, col="blue")
+legend("topleft", col=c("green", "blue"), lty=1, lwd=2, legend=c("Asorbic Acid", "Orange Juice"))
+```
+From the above plot we hypothesize that Orange Juice is a better delivery method than Asorbic Acid for low doses of Vitamin C (0.5 to 1 mg) but does not provide a signifigant benefit at higher doses (2mg)
+
+##Results
+Since the sample set is realatively small for this study, we used T confidence intervals to compare the results
+
+###0.5mg of Vitamin C
+The code below calculates the 95% T confidence interval for the 2 delivery methods at a dose of 0.5mg
+```{r}
+VC_0.5 <- VC[VC$dose == 0.5,]
+OJ_0.5 <- OJ[OJ$dose == 0.5,]
+t.test(VC_0.5$len, OJ_0.5$len, paired = FALSE, var.equal = FALSE)$conf
+```
+From the calculations above we see that the interval does not contain 0, confirming our hypothesis that the Orange Juice delivery method outperforms the Asorbic Acid delivery method
+
+###1.0mg of Vitamin C
+The code below calculates the 95% T confidence interval for the 2 delivery methods at a dose of 1.0mg
+```{r}
+VC_1.0 <- VC[VC$dose == 1.0,]
+OJ_1.0 <- OJ[OJ$dose == 1.0,]
+t.test(VC_1.0$len, OJ_1.0$len, paired = FALSE, var.equal = FALSE)$conf
+```
+From the calculations above we see that the interval does not contain 0, confirming our hypothesis that the Orange Juice delivery method outperforms the Asorbic Acid delivery method
+
+###2.0mg of Vitamin C
+The code below calculates the 95% T confidence interval for the 2 delivery methods at the higher dose of 2.0mg
+```{r}
+VC_2.0 <- VC[VC$dose == 2.0,]
+OJ_2.0 <- OJ[OJ$dose == 2.0,]
+t.test(VC_2.0$len, OJ_2.0$len, paired = FALSE, var.equal = FALSE)$conf
+```
+From the calculations above we see that the interval for this higher dose does contain 0, confirming our hypothesis that the Orange Juice delivery method does not maintain an advantage over Asorbic Acid delivery method at this higher Vitamin C dose
